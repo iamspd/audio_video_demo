@@ -13,7 +13,7 @@ import android.widget.SeekBar;
 public class AudioActivity extends AppCompatActivity {
 
     // widgets
-    private SeekBar seekBar;
+    private SeekBar volumeSeekBar, audioSeekBar;
 
     // variables
     private MediaPlayer mPlayer;
@@ -27,7 +27,7 @@ public class AudioActivity extends AppCompatActivity {
 
         mPlayer = MediaPlayer.create(this, R.raw.car_starting);
 
-        seekBar = findViewById(R.id.seekBar);
+        volumeSeekBar = findViewById(R.id.volumeSeekBar);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
@@ -36,10 +36,10 @@ public class AudioActivity extends AppCompatActivity {
         int maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
         int currentVolume = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
 
-        seekBar.setMax(maxVolume);
-        seekBar.setProgress(currentVolume);
+        volumeSeekBar.setMax(maxVolume);
+        volumeSeekBar.setProgress(currentVolume);
 
-        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+        volumeSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
 
@@ -60,12 +60,12 @@ public class AudioActivity extends AppCompatActivity {
 
     }
 
-    public void onClickPlay(View view){
+    public void onClickPlay(View view) {
 
         mPlayer.start();
     }
 
-    public void onClickPause(View view){
+    public void onClickPause(View view) {
 
         mPlayer.pause();
     }
