@@ -13,6 +13,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="12dp"
         android:gravity="center"
+        android:onClick="onClickPlay"
         android:text="Play"
         android:textAllCaps="false" />
 
@@ -24,6 +25,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="12dp"
         android:gravity="center"
+        android:onClick="onClickPause"
         android:text="Pause"
         android:textAllCaps="false" />
 
