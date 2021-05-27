@@ -10,6 +10,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.SeekBar;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class AudioActivity extends AppCompatActivity {
 
     // widgets
@@ -27,6 +30,7 @@ public class AudioActivity extends AppCompatActivity {
 
         mPlayer = MediaPlayer.create(this, R.raw.car_starting);
 
+        // volume seekBar
         volumeSeekBar = findViewById(R.id.volumeSeekBar);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -45,6 +49,36 @@ public class AudioActivity extends AppCompatActivity {
 
                 audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, progress, 0);
 
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+
+        // audio seekBar
+        audioSeekBar = findViewById(R.id.audioSeekBar);
+
+        audioSeekBar.setMax(mPlayer.getDuration());
+
+        new Timer().scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                audioSeekBar.setProgress(mPlayer.getCurrentPosition());
+            }
+        }, 0, 1000);
+
+        audioSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+
+                mPlayer.seekTo(progress);
             }
 
             @Override
